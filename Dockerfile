@@ -1,17 +1,15 @@
 FROM node:14
 
-RUN mkdir -p /app
-
 WORKDIR /app
 
-COPY package*.json /app
+COPY package*.json ./
 
 RUN npm install
 
-COPY . /app
+COPY . .
 
 RUN npm run build --prod
 
 EXPOSE 4200
 
-ENTRYPOINT ["npm", "start"]
+CMD ["npm", "start"]
