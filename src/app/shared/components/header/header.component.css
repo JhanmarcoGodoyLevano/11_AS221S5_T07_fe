@@ -1,0 +1,100 @@
+/* @import "~@fortawesome/fontawesome-free/css/all.css"; */
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #303030;
+    color: #fff;
+    min-width: 60px;
+    width: auto;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: min-width 0.3s;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    overflow: hidden;
+  }
+  
+  .sidebar:hover {
+    min-width: 250px;
+  }
+  
+  .sidebar-header {
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .sidebar-header .sidebar-title span {
+    display: none;
+    margin-left: 10px;
+  }
+  
+  .sidebar:hover .sidebar-header .sidebar-title span {
+    display: inline;
+  }
+  
+  .menu {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    width: 100%;
+  }
+  
+  .menu li {
+    margin: 10px 0;
+  }
+  
+  .menu a {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-left: 4px solid transparent;
+    transition: background-color 0.2s, border-left-color 0.2s;
+    width: 100%;
+  }
+  
+  .menu a span {
+    margin-left: 10px;
+    display: none;
+  }
+  
+  .menu a:hover {
+    background-color: #444;
+    border-left-color: #00f;
+  }
+  
+  .sidebar:hover .menu a span {
+    display: inline;
+  }
+  
+  .menu.mt-auto {
+    margin-top: auto;
+  }
+  
+  .menu i {
+    transition: transform 0.2s;
+  }
+  
+  .menu a:hover i {
+    transform: scale(1.2);
+  }
+  
+  .sidebar-header .sidebar-title {
+    font-size: 1.5rem;
+  }
+  
+  .menu a {
+    font-size: 1rem;
+  }
+  
+  .menu i {
+    font-size: 1.2rem;
+  }
+  
+  

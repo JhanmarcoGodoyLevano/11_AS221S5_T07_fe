@@ -1,0 +1,117 @@
+<div class="container my-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="display-4">Lista de Metadatos</h1>
+        </div>
+        <div class="col text-right">
+            <button *ngIf="showActive" class="btn btn-primary" (click)="addMetadata()" style="margin-left: 10px;">
+                <i class="fas fa-plus"></i> Agregar
+            </button>
+            <button *ngIf="!showActive" class="btn btn-success" (click)="toggleActiveInactive()" style="margin-left: 10px;">
+                <i class="fas fa-eye"></i>
+            </button>
+            <button *ngIf="showActive" class="btn btn-warning" (click)="toggleActiveInactive()" style="margin-left: 10px;">
+                <i class="fas fa-eye-slash"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Formulario emergente -->
+    <div *ngIf="showForm" class="modal d-block" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Agregar Metadato</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="metadataUrl">URL del Metadato</label>
+                        <input type="text" class="form-control" id="metadataUrl" [(ngModel)]="newMetadataUrl" placeholder="Ingrese la URL del metadato">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" (click)="submitMetadata(); showForm = false;">
+                        <i class="fas fa-check"></i> Guardar
+                    </button>
+                    <button class="btn btn-secondary" (click)="showForm = false">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin del formulario emergente -->
+
+
+<div *ngIf="metadataList.length === 0" class="alert alert-info text-center">
+    No hay metadatos disponibles.
+</div>
+
+<div *ngIf="metadataList.length > 0" class="table-responsive">
+    <table class="table table-hover table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Título</th>
+                <th scope="col">Fecha de Publicación</th>
+                <th scope="col">Imagen</th>
+                <th scope="col">Feeds</th>
+                <th scope="col">Autores</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let metadata of paginatedMetadataList; let i = index">
+                <th scope="row">{{ (currentPage - 1) * itemsPerPage + i + 1 }}</th>
+                <td>{{ truncateTitle(metadata.title, 20) }}</td>
+                <td>{{ metadata.publicationDate | date:'MMM d, y, h:mm a' }}</td>
+                <td>
+                    <img [src]="metadata.imageUrl" alt="{{ metadata.title }}" class="img-thumbnail" style="max-width: 100px;">
+                </td>
+                <td>
+                    <ng-container *ngFor="let feed of displayFeeds(metadata.feeds)">
+                        <div>{{ feed }}</div>
+                    </ng-container>
+                </td>
+                <td>{{ displayAuthors(metadata.authors) }}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Acciones">
+                        <button *ngIf="metadata.active === 'A'" class="btn btn-sm btn-primary" (click)="editMetadata(metadata.id)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button *ngIf="metadata.active === 'A'" class="btn btn-sm btn-danger" (click)="confirmDeactivateMetadata(metadata.id)">
+                            <i class="fas fa-ban"></i>
+                        </button>
+                        <button *ngIf="metadata.active === 'I'" class="btn btn-sm btn-success" (click)="confirmActivateMetadata(metadata.id)">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+    <!-- Paginación -->
+    <nav *ngIf="totalPages() > 1" aria-label="Page navigation">
+        <ul class="pagination justify-content-end">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="changePage(currentPage - 1)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li *ngFor="let page of [].constructor(totalPages()); let pageIndex = index" class="page-item" [class.active]="pageIndex + 1 === currentPage">
+                <a class="page-link" (click)="changePage(pageIndex + 1)">{{ pageIndex + 1 }}</a>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage === totalPages()">
+                <a class="page-link" (click)="changePage(currentPage + 1)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- Fin de Paginación -->
+
+<!-- Fondo oscurecido -->
+<div *ngIf="showForm || showEditForm" class="modal-backdrop fade show"></div>
+

@@ -1,0 +1,57 @@
+/* metadata-list.component.css */
+
+/* Estilos para el encabezado */
+.display-4 {
+    color: #333;
+}
+
+/* Estilos para el botón de añadir metadato */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Estilos para la tabla */
+.table {
+    background-color: #fff;
+}
+
+.table th,
+.table td {
+    vertical-align: middle;
+}
+
+.table th {
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+/* Estilos para los botones de acción */
+.btn-group .btn {
+    font-size: 14px;
+    margin-right: 5px;
+    padding: 0.25rem 0.5rem; /* Ajustar el espacio entre el icono y el borde del botón */
+}
+
+.btn-group .btn i {
+    margin-right: 0; /* Eliminar el espacio entre el icono y el borde derecho del botón */
+}
+
+/* Alinear los botones a la derecha */
+.text-right {
+    text-align: right;
+}
+
+/* Ajustar el margen derecho de los botones */
+.btn-group {
+    margin-right: 10px;
+}
