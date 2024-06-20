@@ -67,12 +67,6 @@
             "browserTarget": "AS221S5_T07_fe:build"
           }
         },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "host": "0.0.0.0",
-            "port": 4200
-          },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
